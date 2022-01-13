@@ -14,13 +14,20 @@ bool latch2 = false;
 bool toggle3 = false;
 bool latch3 = false;
 
+bool toggle4 = false;
+bool latch4 = false;
+
+
 int armControl() {
   if (manual == false) {
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-      arm.move_absolute(400, 100);
+      arm.move_absolute(350, 100);
     }
     else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
       arm.move_absolute(0, 100);
+    }
+    else if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+      arm.move_absolute(400, 100);
     }
   }
   else {
@@ -44,8 +51,7 @@ int conveyorControl() {
   if (toggle){
     conveyor.move_velocity(600);
   } else {
-    conveyor.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    conveyor.move_velocity(0);
+    conveyor.move_velocity(-200);
   }
 
   if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
@@ -109,25 +115,26 @@ int tilterControl() {
   return 1;
 }
 
-int manualControl() {
-  if (toggle3){
-    manual=true;
+int boingControl() {
+  if (toggle4){
+    boing.set_value(false);
   } else {
-    manual=false;
+    boing.set_value(true);
   }
 
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
-    if(!latch3){
-      toggle3 = !toggle3;
-      latch3 = true;
+    if(!latch4){
+      toggle4 = !toggle4;
+      latch4 = true;
     }
   } else {
-    latch3 = false;
+    latch4 = false;
   }
 
   pros::delay(20);
 
   return 1;
+
 }
 
 void resetEncoders() {

@@ -65,9 +65,9 @@ auto_1() {
   // The third parameter is max speed the robot will drive at
   // The fourth parameter is a boolean (true or false) for enabling/disabling a slew at the start of drive motions
   // for slew, only enable it when the drive distance is greater then the slew distance + a few inches
+  neutralMogoAuton();
 
 
-  homeRowAuton();
 }
 
 

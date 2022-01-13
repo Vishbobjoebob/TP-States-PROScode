@@ -44,6 +44,7 @@ pros::Motor conveyor(8, MOTOR_GEARSET_6, true, MOTOR_ENCODER_DEGREES);
 pros::ADIDigitalOut clamp('G', true);
 pros::ADIDigitalOut leftTilter('E', false);
 pros::ADIDigitalOut rightTilter('F', false);
+pros::ADIDigitalOut boing('H', true);
 
 
 // Initializes pros reversing

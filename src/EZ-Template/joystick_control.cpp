@@ -13,6 +13,9 @@ float RIGHT_CURVE_SCALE = STARTING_RIGHT_CURVE_SCALE;
 pros::controller_analog_e_t current_l_stick = LEFT_JOYSTICK;
 pros::controller_analog_e_t current_r_stick = RIGHT_JOYSTICK;
 bool IS_TANK = TANK_CONTROL;
+bool coastToggle = false;
+bool coastLatch = false;
+bool coast = true;
 
 
 ///
@@ -112,6 +115,27 @@ left_curve_function(int x) {
   return x;
 }
 
+int coastControl() {
+  if (coastToggle){
+    coast = false;
+  } else {
+    coast = true;
+  }
+
+  if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+    if(!coastLatch){
+      coastToggle = !coastToggle;
+      coastLatch = true;
+    }
+  } else {
+    coastLatch = false;
+  }
+
+  pros::delay(20);
+
+  return 1;
+}
+
 ///
 // Joystick Control
 ///
@@ -165,13 +189,19 @@ chassis_joystick_control() {
   }
   // When joys are released, run active brake (P) on drive
   else {
-    set_tank((0-left_sensor())*ACTIVE_BRAKE_KP, (0-right_sensor())*ACTIVE_BRAKE_KP);
+    if (coast == true) {
+      set_tank((0-left_sensor())*ACTIVE_BRAKE_KP, (0-right_sensor())*ACTIVE_BRAKE_KP);
+    }
+    else {
+      set_tank(0,0);
+      set_drive_brake(pros::E_MOTOR_BRAKE_HOLD);
+    }
   }
 
   pros::Task arm_control_task(armControl);
   pros::Task conveyor_control_task(conveyorControl);
   pros::Task clamp_control_task(clampControl);
   pros::Task tilter_control_task(tilterControl);
-  pros::Task manual_control_task(manualControl);
-
+  pros::Task boing_control_task(boingControl);
+  pros::Task coast_control_task(coastControl);
 }

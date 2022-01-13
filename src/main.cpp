@@ -96,7 +96,6 @@ initialize() {
   if(!imu_calibrate()) {
     pros::lcd::set_text(7, "IMU failed to calibrate!");
   }
-
   chassis_motor_init();
 }
 
