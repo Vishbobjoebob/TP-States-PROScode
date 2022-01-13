@@ -7,4 +7,5 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #pragma once
 #include "api.h"
 
+int coastControl();
 void chassis_joystick_control();

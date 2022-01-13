@@ -5,4 +5,5 @@ int conveyorControl();
 int tilterControl();
 int clampControl();
 int manualControl();
+int boingControl();
 void resetEncoders();

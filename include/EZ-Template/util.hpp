@@ -18,6 +18,7 @@ extern pros::Motor conveyor;
 extern pros::ADIDigitalOut clamp;
 extern pros::ADIDigitalOut leftTilter;
 extern pros::ADIDigitalOut rightTilter;
+extern pros::ADIDigitalOut boing;
 
 void chassis_motor_init();
 
