@@ -47,24 +47,36 @@ void stopDumpRingTask() {
 }
 
 void homeRowAuton() {
+  while(arm.get_position() <= 100) {
+    arm.move_absolute(100,100);
+    pros::delay(2);
+  }
+  pros::delay(200);
+  set_drive_pid(drive,4,80,false);
+  wait_drive();
+  pros::delay(200);
   clampUp();
-  pros::delay(500);
-  set_drive_pid(drive, 8, 50, true);
-  pros::delay(500);
-  clampDown();
-  pros::delay(500);
-  set_drive_pid(turn, -90, 250);
+  set_drive_pid(drive,-4,80,false);
   wait_drive();
-  set_drive_pid(drive, 29, 324, true);
+  pros::delay(200);
+  set_drive_pid(turn, -90, 110);
   wait_drive();
-  set_drive_pid(turn, -180, 250);
+  set_drive_pid(drive, 23, 110, true);
+  wait_drive();
+  set_drive_pid(turn, -180, 110);
   wait_drive();
   tilterDown();
-  set_drive_pid(drive, -123, 324, true);
+  set_drive_pid(drive, -139, 110, true);
   wait_drive();
   pros::delay(100);
-  set_drive_pid(drive, 15, 200, false);
+  tilterUp();
+  set_drive_pid(drive, 20, 110, false);
   wait_drive();
+  while(arm.get_position() <= 400) {
+    arm.move_absolute(400,100);
+    pros::delay(2);
+  }
+  conveyor.move_velocity(600);
 }
 
 void neutralMogoAuton() {
@@ -78,27 +90,118 @@ void neutralMogoAuton() {
   clampUp();
   set_drive_pid(drive, -21, 110, true);
   wait_drive();
-  set_drive_pid(turn, -34, 110);
+  set_drive_pid(turn, -31, 110);
   wait_drive();
-  set_drive_pid(drive, 63, 110, true);
+  set_drive_pid(drive, 64, 110, true);
   wait_drive();
   clampDown();
-  set_drive_pid(drive, -63, 110, true);
+  set_drive_pid(drive, -64, 110, true);
   wait_drive();
   clampUp();
-  set_drive_pid(drive,-7, 110, true);
+  set_drive_pid(drive,-9, 110, true);
   wait_drive();
   set_drive_pid(turn,-129,110);
   wait_drive();
   tilterDown();
   pros::delay(500);
-  set_drive_pid(drive,-38, 110, true);
+  set_drive_pid(drive,-42, 110, true);
   wait_drive();
   tilterUp();
-  set_drive_pid(drive, 20, 110);
+  pros::delay(500);
+  set_drive_pid(l_swing, -33, 110);
+  wait_drive();
+  pros::delay(500);
+  set_drive_pid(drive,6,40);
+  wait_drive();
+  clampDown();
+  set_drive_pid(drive,-6, 40);
   wait_drive();
 }
 
 void skills() {
+  arm.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+  tilterDown();
+  clampUp();
+  pros::delay(500);
+  set_drive_pid(drive, -16, 100, true);
+  wait_drive();
+  pros::delay(500);
+  tilterUp();
+  pros::delay(200);
+  set_drive_pid(l_swing, 104, 80);
+  wait_drive();
+  set_drive_pid(drive, 64, 50, true);
+  wait_drive();
+  pros::delay(700);
+  clampDown();
+  pros::delay(500);
+  while(arm.get_position() <= 400) {
+    arm.move_absolute(400,100);
+    pros::delay(2);
+  }
+  pros::delay(500);
+  set_drive_pid(turn,120,90);
+  wait_drive();
+  set_drive_pid(drive, 70, 80, true);
+  wait_drive();
+  set_drive_pid(turn, 80, 90);
+  wait_drive();
+  pros::delay(500);
+  set_drive_pid(turn, 100, 90);
+  wait_drive();
+  pros::delay(500);
+  clampUp();
+  pros::delay(500);
+  set_drive_pid(turn, 90, 100);
+  wait_drive();
+  set_drive_pid(drive, -20, 100);
+  wait_drive();
+  set_drive_pid(turn, 180, 100);
+  wait_drive();
+  conveyor.move_velocity(600);
+  set_drive_pid(drive, 65, 100, true);
+  wait_drive();
+  pros::delay(500);
+  set_drive_pid(drive, -11, 100, true);
+  wait_drive();
+  while(arm.get_position() >= 0) {
+    arm.move_absolute(0,100);
+    pros::delay(2);
+  }
+  set_drive_pid(turn, 270, 100);
+  wait_drive();
+  pros::delay(500);
+  set_drive_pid(drive, 30, 50, true);
+  wait_drive();
+  pros::delay(500);
+  clampDown();
+  while(arm.get_position() <= 350) {
+    arm.move_absolute(350,100);
+    pros::delay(2);
+  }
+  set_drive_pid(turn, 300, 90);
+  wait_drive();
+  set_drive_pid(drive, 60, 90, true);
+  wait_drive();
+  pros::delay(500);
+  clampUp();
+  set_drive_pid(drive, -24, 90, true);
+  wait_drive();
+  while(arm.get_position() >= 0) {
+    arm.move_absolute(0,100);
+    pros::delay(2);
+  }
+  set_drive_pid(turn, 405, 90, true);
+  wait_drive();
+  set_drive_pid(drive, 50, 50, true);
+  wait_drive();
+  pros::delay(500);
+  clampDown();
+  pros::delay(500);
+  set_drive_pid(drive, 50, 50, true);
+  wait_drive();
+
+
+
 
 }
