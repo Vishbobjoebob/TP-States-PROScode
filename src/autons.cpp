@@ -65,7 +65,7 @@ auto_1() {
   // The third parameter is max speed the robot will drive at
   // The fourth parameter is a boolean (true or false) for enabling/disabling a slew at the start of drive motions
   // for slew, only enable it when the drive distance is greater then the slew distance + a few inches
-  neutralMogoAuton();
+  skills();
 
 
 }
@@ -89,7 +89,7 @@ auto_2() {
   //
   // set_drive_pid(turn, 0, TURN_SPEED);
   // wait_drive();
-  neutralMogoAuton();
+  skills();
 }
 
 
@@ -188,7 +188,7 @@ test_auton() {
   //
   // set_drive_pid(drive, -24, DRIVE_SPEED, true);
   // wait_drive();
-  neutralMogoAuton();
+  skills();
 }
 
 
